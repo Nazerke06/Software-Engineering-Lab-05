@@ -3,35 +3,30 @@ package com.example.LAB_05.models;
 
 import com.example.LAB_05.entity.Courses;
 import com.example.LAB_05.entity.Operators;
-import com.example.LAB_05.repository.CourseRepository;
-import com.example.LAB_05.repository.OperatorRepository;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-
-
 @Entity
-@Table(name = "ApplicationList")
+@Table(name = "CoursesList")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ApplicationRequest {
+public class courses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id")
     private Long id;
-    @Column(name = "Name", length = 200)
-    private String userName;
-    @Column(name = "Commentary", length = 200)
-    private String commentary;
-    @Column(name = "Phone", length = 200)
-    private String phone;
+    @Column(name = "CourseName", length = 200)
+    private String coursesName;
+    @Column(name = "Description", length = 200)
+    private String description;
+    @Column(name = "price", length = 200)
+    private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
@@ -39,10 +34,10 @@ public class ApplicationRequest {
 
     @ManyToMany
     @JoinTable(
-            name = "application_request_operators",
+            name = "courses_operators",
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "operator_id")
     )
     private List<Operators> operators;
-    private boolean handled;
+
 }

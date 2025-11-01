@@ -1,6 +1,6 @@
 package com.example.LAB_05.entity;
 
-import com.example.LAB_05.models.ApplicationRequest;
+import com.example.LAB_05.models.applicationRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -22,5 +22,5 @@ public class Operators {
     private String department;
 
     @ManyToMany(mappedBy = "operators")
-    private List<ApplicationRequest> applicationRequests;
+    private List<applicationRequest> applicationRequests;
 }

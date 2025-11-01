@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Operators</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        div.info {
+            width: 400px;
+            margin: 0 auto 20px auto;
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        div.info p {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin: 8px 0;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Assign Operators to Request</h1>
+
+<div>
+    <p><strong>User:</strong> <span th:text="${applicationRequest.userName}"></span></p>
+    <p><strong>Phone:</strong> <span th:text="${applicationRequest.phone}"></span></p>
+    <p><strong>Course:</strong> <span th:text="${applicationRequest.course != null ? applicationRequest.course.name : '—'}"></span></p>
+</div>
+
+<form th:action="@{'/requests/' + ${applicationRequest.id} + '/assignOperators'}" method="post">
+    <p>Select operators:</p>
+
+    <div th:each="op : ${operators}">
+        <label>
+            <input type="checkbox" name="operatorIds" th:value="${op.id}"
+                   th:checked="${applicationRequest.operators != null and applicationRequest.operators.contains(op)}">
+            <span th:text="${op.name + ' ' + op.surname + ' (' + op.department + ')'}"></span>
+        </label><br>
+    </div>
+
+    <br>
+    <button type="submit">Assign</button>
+</form>
+
+<br>
+<a href="/">⬅ Back to all requests</a>
+</body>
+</html>

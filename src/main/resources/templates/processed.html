@@ -1,27 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Processed Requests</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background-color: #f1f7ff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: #eef5ee;
+            border: 1px solid #cde0ce;
+            border-radius: 5px;
+            padding: 6px 10px;
+            margin: 4px 0;
+        }
+
+        li:hover {
+            background: #d6ecd8;
+        }
+    </style>
+    <meta charset="UTF-8">
 </head>
 <body>
-<h2>Processed Requests</h2>
-<table border="1">
+<h1>Processed Requests</h1>
+<a href="/">⬅ Back</a>
+
+<table border="1" cellpadding="5">
     <tr>
         <th>ID</th>
-        <th>User</th>
+        <th>User Name</th>
         <th>Course</th>
-        <th>Phone</th>
-        <th>Status</th>
+        <th>Operators</th>
     </tr>
+
     <tr th:each="req : ${applicationRequests}">
         <td th:text="${req.id}"></td>
         <td th:text="${req.userName}"></td>
-        <td th:text="${req.courseName}"></td>
-        <td th:text="${req.phone}"></td>
-        <td>Processed</td>
+        <td th:text="${req.course.name}"></td>
+        <td>
+            <ul>
+                <li th:each="op : ${req.operators}"
+                    th:text="${op.name + ' ' + op.surname + ' (' + op.department + ')'}"></li>
+            </ul>
+        </td>
     </tr>
 </table>
-<a href="/">Back to main</a>
 </body>
 </html>

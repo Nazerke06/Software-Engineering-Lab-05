@@ -1,27 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Pending Requests</title>
+    <style>
+    body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+    }
+
+    h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    }
+
+    a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    }
+
+    a:hover {
+    text-decoration: underline;
+    }
+
+    .back-link {
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 16px;
+    }
+
+    table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    th {
+    background-color: #ffc107;
+    color: #333;
+    padding: 12px;
+    text-align: left;
+    }
+
+    td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+    background-color: #fff7e0;
+    }
+
+    .process-link {
+    color: #28a745;
+    font-weight: 500;
+    }
+
+    .process-link:hover {
+    text-decoration: underline;
+    }
+    </style>
+    <meta charset="UTF-8">
 </head>
 <body>
-<h2>Pending Requests</h2>
-<table border="1">
+<h1>Pending Requests</h1>
+<a href="/">⬅ Back</a>
+
+<table border="1" cellpadding="5">
     <tr>
         <th>ID</th>
-        <th>User</th>
+        <th>User Name</th>
         <th>Course</th>
-        <th>Phone</th>
-        <th>Status</th>
+        <th>Actions</th>
     </tr>
+
     <tr th:each="req : ${applicationRequests}">
         <td th:text="${req.id}"></td>
         <td th:text="${req.userName}"></td>
-        <td th:text="${req.courseName}"></td>
-        <td th:text="${req.phone}"></td>
-        <td>Pending</td>
+        <td th:text="${req.course.name}"></td>
+        <td><a th:href="@{'/process/' + ${req.id}}">Process</a></td>
     </tr>
 </table>
-<a href="/">Back to main</a>
 </body>
 </html>
