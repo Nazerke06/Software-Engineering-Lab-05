@@ -5,7 +5,7 @@ import com.example.LAB_05.models.applicationRequest;
 
 import java.util.List;
 
-public interface ApplicationRequestInterface {
+public interface ApplicationRequestDto {
     List<applicationRequest> getApplications();
     applicationRequest addApplication(applicationRequest tyre);
     applicationRequest getApplication(Long id);
